@@ -24,5 +24,17 @@ html>
     }
     document.getElementById("date").textContent =
   new Date().toLocaleDateString
-  </script>
+  </scr
+  localStorage.setItem("done", today);
+      showDone();
+    }
 
+    function showDone() {
+      document.getElementById("result").textContent = "今日はやった！🎉";
+      document.body.classList.add("done");
+    }
+  </script>
+</body>
+</html
+
+          
