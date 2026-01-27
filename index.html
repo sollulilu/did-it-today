@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>今日やった？</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body style="text-align:center; font-family:sans-serif; padding-top:50px;">
+
+  <h1>今日やった？</h1>
+  <button onclick="done()" style="font-size:24px;">やった！</button>
+  <p id="result" style="margin-top:20px;"></p>
+
+  <script>
+    function done() {
+      const today = new Date().toDateString();
+      localStorage.setItem("done", today);
+      document.getElementById("result").textContent = "今日はやった！🎉";
+    }
+
+    if (localStorage.getItem("done") === new Date().toDateString()) {
+      document.getElementById("result").textContent = "今日はやった！🎉";
+    }
+  </script>
+
+</body>
+</html>
