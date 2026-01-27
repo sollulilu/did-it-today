@@ -40,31 +40,66 @@
 <body>
   <h1>今日オナニーした？</h1>
   <div id="date"></div>
+  <div id="streak"></div>
+  <div id="date"></div>
 
   <button onclick="done()">した！</button>
   <div id="result"></div>
 
-  <script>
-    const today = new Date().toDateString();
+ <script>
+  // 今日の日付を用意
+  const today = new Date();
+  const todayStr = today.toDateString();
 
-    // 日付表示
-    document.getElementById("date").textContent =
-      new Date().toLocaleDateString();
+  // 日付を画面に表示
+  document.getElementById("date").textContent =
+    today.toLocaleDateString();
 
-    // すでにやってた場合
-    if (localStorage.getItem("done") === today) {
-      showDone();
+  // 保存されている値を読む
+  let streak = Number(localStorage.getItem("streak")) || 0;
+  const lastDone = localStorage.getItem("lastDone");
+
+  // すでに今日やってたら表示
+  if (lastDone === todayStr) {
+    showDone();
+  }
+
+  // ボタンを押した時
+  function done() {
+    if (lastDone) {
+      const last = new Date(lastDone);
+      const diff =
+        (today - last) / (1000 * 60 * 60 * 24);
+
+      if (diff < 1.5) {
+        // 同じ日 → 何もしない
+      } else if (diff < 2.5) {
+        // 連続
+        streak++;
+      } else {
+        // 途切れた
+        streak = 1;
+      }
+    } else {
+      // 初回
+      streak = 1;
     }
 
-    function done() {
-      localStorage.setItem("done", today);
-      showDone();
-    }
+    // 保存
+    localStorage.setItem("streak", streak);
+    localStorage.setItem("lastDone", todayStr);
 
-    function showDone() {
-      document.getElementById("result").textContent = "今日はやった！🎉";
-      document.body.classList.add("done");
-    }
-  </script>
+    showDone();
+  }
+
+  // 表示する処理
+  function showDone() {
+    document.getElementById("result").textContent =
+      "今日はやった！🎉";
+    document.getElementById("streak").textContent =
+      `🔥 ${streak}日連続！`;
+  }
+</script>
+  
 </body>
 </html>
