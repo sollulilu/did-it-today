@@ -1,31 +1,63 @@
-html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <title>今日やった？</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      text-align: center;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      padding-top: 60px;
+      background-color: #f5f7fa;
+      transition: background-color 0.3s;
+    }
+    h1 {
+      font-size: 32px;
+    }
+    #date {
+      color: #666;
+      margin-bottom: 30px;
+    }
+    button {
+      font-size: 24px;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 12px;
+      background-color: #4caf50;
+      color: white;
+    }
+    #result {
+      margin-top: 25px;
+      font-size: 20px;
+    }
+    .done {
+      background-color: #e0ffe0;
+    }
+  </style>
 </head>
-<body style="text-align:center; font-family:sans-serif; padding-top:50px;">
 
+<body>
   <h1>今日やった？</h1>
-  <p id="date"></p>
-  <button onclick="done()" style="font-size:24px;">やった！</button>
-  <p id="result" style="margin-top:20px;"></p>
+  <div id="date"></div>
+
+  <button onclick="done()">やった！</button>
+  <div id="result"></div>
 
   <script>
-    function done() {
-      const today = new Date().toDateString();
-      localStorage.setItem("done", today);
-      document.getElementById("result").textContent = "今日はやった！🎉";
+    const today = new Date().toDateString();
+
+    // 日付表示
+    document.getElementById("date").textContent =
+      new Date().toLocaleDateString();
+
+    // すでにやってた場合
+    if (localStorage.getItem("done") === today) {
+      showDone();
     }
 
-    if (localStorage.getItem("done") === new Date().toDateString()) {
-      document.getElementById("result").textContent = "今日はやった！🎉";
-    }
-    document.getElementById("date").textContent =
-  new Date().toLocaleDateString
-  </scr
-  localStorage.setItem("done", today);
+    function done() {
+      localStorage.setItem("done", today);
       showDone();
     }
 
@@ -35,6 +67,4 @@ html>
     }
   </script>
 </body>
-</html
-
-          
+</html>
