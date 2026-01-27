@@ -8,6 +8,7 @@
 <body style="text-align:center; font-family:sans-serif; padding-top:50px;">
 
   <h1>今日やった？</h1>
+  <p id="date"></p>
   <button onclick="done()" style="font-size:24px;">やった！</button>
   <p id="result" style="margin-top:20px;"></p>
 
@@ -21,7 +22,10 @@
     if (localStorage.getItem("done") === new Date().toDateString()) {
       document.getElementById("result").textContent = "今日はやった！🎉";
     }
+    document.getElementById("date").textContent =
+  new Date().toLocaleDateString
   </script>
+  ();
 
 </body>
 </html>
